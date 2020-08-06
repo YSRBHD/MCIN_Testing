@@ -36,7 +36,7 @@ public class AcreditacionEsTestCase {
 		solicitante.checkSolicitudFirmadaYPresentada();
 		driver.quit();
 	}
-//
+
 //	  TEST CASE 2 : We will create a new "Solicitud" like "Representante Juridica" type
 //   "Acreditacion" and check if all the data is correctly generated in the
 //	 "Presentacion Tab".
