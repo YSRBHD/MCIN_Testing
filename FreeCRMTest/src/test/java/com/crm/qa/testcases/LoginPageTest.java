@@ -1,7 +1,5 @@
 package com.crm.qa.testcases;
 
-import java.awt.AWTException;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,9 +9,9 @@ import com.crm.qa.pages.LoginPage;
 public class LoginPageTest extends LoginPage {
 
 	@BeforeMethod
-	public void setUp() throws AWTException {
+	public void setUp() {
 		initialization();
-		authentication();
+		// authentication();
 
 		// Here we can add the authentification method
 	}

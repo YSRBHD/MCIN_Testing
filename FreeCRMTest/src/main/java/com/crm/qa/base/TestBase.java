@@ -84,35 +84,34 @@ public class TestBase {
 		}
 	}
 
+	// ========== Authentication ========== //
+
 	public void clickOnButtonAcceder() {
 		driver.findElement(buttonAcceder).click();
-
-//		driver.findElement(buttonAcceder).click();
 		sleep(null);
 	}
 
 	public void clickOnButtonAccess() {
 		driver.findElement(buttonAccess).click();
-//		driver.findElement(buttonAccess).click();
 		sleep(null);
 	}
 
-	public void chromeCertificate() {
-//		Runnable r = new Runnable() {
-//			@Override
-//			public void run() {
-//				try {
-//					clickOnButtonAccess();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		};
-//
+	public void chooseChromeCertificate() {
+		Runnable r = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					clickOnButtonAccess();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		};
+
 		// Choose first certificate
 		try {
 			Robot robot = new Robot();
-			Thread t = new Thread();
+			Thread t = new Thread(r);
 			t.start();
 			robot.delay(10000);
 			robot.keyPress(KeyEvent.VK_ENTER);
@@ -120,13 +119,11 @@ public class TestBase {
 		} catch (AWTException e1) {
 			e1.printStackTrace();
 		}
-
 	}
 
-	public void authentication() throws AWTException {
+	public void authentication() {
 		clickOnButtonAcceder();
-		clickOnButtonAccess();
-		chromeCertificate();
+		chooseChromeCertificate();
 
 	}
 
