@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="26699" started-at="2020-08-19T11:26:58 CEST" finished-at="2020-08-19T11:27:25 CEST">
+  <suite name="Default suite" duration-ms="45964" started-at="2020-08-26T13:35:50 CEST" finished-at="2020-08-26T13:36:35 CEST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="26699" started-at="2020-08-19T11:26:58 CEST" finished-at="2020-08-19T11:27:25 CEST">
+    <test name="Default test" duration-ms="45964" started-at="2020-08-26T13:35:50 CEST" finished-at="2020-08-26T13:36:35 CEST">
       <class name="com.crm.qa.testcases.LoginPageTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@4493d195]" name="setUp" is-config="true" duration-ms="21387" started-at="2020-08-19T11:26:58 CEST" finished-at="2020-08-19T11:27:20 CEST">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@4493d195]" name="setUp" is-config="true" duration-ms="33217" started-at="2020-08-26T13:35:50 CEST" finished-at="2020-08-26T13:36:23 CEST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="loginPageTitleTest()[pri:1, instance:com.crm.qa.testcases.LoginPageTest@4493d195]" name="loginPageTitleTest" duration-ms="19" started-at="2020-08-19T11:27:20 CEST" finished-at="2020-08-19T11:27:20 CEST">
+        <test-method status="PASS" signature="homologacionTest()[pri:1, instance:com.crm.qa.testcases.LoginPageTest@4493d195]" name="homologacionTest" duration-ms="11890" started-at="2020-08-26T13:36:23 CEST" finished-at="2020-08-26T13:36:35 CEST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginPageTitleTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@4493d195]" name="tearDown" is-config="true" duration-ms="5240" started-at="2020-08-19T11:27:20 CEST" finished-at="2020-08-19T11:27:25 CEST">
+        </test-method> <!-- homologacionTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@4493d195]" name="tearDown" is-config="true" duration-ms="805" started-at="2020-08-26T13:36:35 CEST" finished-at="2020-08-26T13:36:35 CEST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

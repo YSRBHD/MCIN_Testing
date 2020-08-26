@@ -4,24 +4,19 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.crm.qa.pages.LoginPage;
+import com.crm.qa.pages.SolicitudHomologacionPage;
 
-public class LoginPageTest extends LoginPage {
+public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 
 	@BeforeMethod
 	public void setUp() {
 		initialization();
-		// authentication();
-
-		// Here we can add the authentification method
+		authentication();
 	}
 
 	@Test(priority = 1)
-	public void loginPageTitleTest() {
-
-//		String title = loginPage.validateLoginPageTile();
-//		Assert.assertEquals(title, "Google");
-		// Use AssertEquals Assert.assertEquals(title, "Google", "Title not mached");
+	public void homologacionTest() {
+		fillTabDatosRelativosAlProcedimientoParaSolicitante();
 	}
 
 //	@Test(priority = 2)

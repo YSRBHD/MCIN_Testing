@@ -19,14 +19,17 @@ import com.crm.qa.util.TestUtil;
 
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
+import io.github.bonigarcia.wdm.managers.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.managers.InternetExplorerDriverManager;
 
 public class TestBase {
 
-	public static WebDriver driver;
+	public static WebDriver driver = null;
 	public static Properties prop;
 
 	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
 	By buttonAccess = By.xpath("//*[@id=\"tooltip1\"]/div[2]/div/fieldset/div");
+	By buttonNuevaSolicitud = By.xpath("//*[@id=\"mainWrapper\"]/div[2]/div/div/div[1]/div[2]/button");
 
 	public TestBase() {
 
@@ -35,7 +38,7 @@ public class TestBase {
 			prop = new Properties();
 			// Location of the Propreties File
 			FileInputStream ip = new FileInputStream(
-					"C:\\Development\\MCIN\\FreeCRMTest\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
+					"C:\\Users\\developer\\git\\repository\\FreeCRMTest\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
 			// Connection between the Java Code and the Propreties File (Load Properties)
 			prop.load(ip);
 
@@ -56,12 +59,12 @@ public class TestBase {
 		}
 
 		else if (browserName.equals("FF")) {
-			ChromeDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
+			FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
 			driver = new FirefoxDriver();
 		}
 
 		else if (browserName.equals("IE")) {
-			ChromeDriverManager.getInstance(DriverManagerType.IEXPLORER).setup();
+			InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).setup();
 			driver = new InternetExplorerDriver();
 		}
 
@@ -96,6 +99,11 @@ public class TestBase {
 		sleep(null);
 	}
 
+	public void clickOnButtonNuevaSolicitud() {
+		driver.findElement(buttonNuevaSolicitud).click();
+		sleep(null);
+	}
+
 	public void chooseChromeCertificate() {
 		Runnable r = new Runnable() {
 			@Override
@@ -124,6 +132,7 @@ public class TestBase {
 	public void authentication() {
 		clickOnButtonAcceder();
 		chooseChromeCertificate();
+		clickOnButtonNuevaSolicitud();
 
 	}
 
