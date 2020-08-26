@@ -106,7 +106,7 @@ public class HomologacionEsPageObject extends SolicitudPageObject {
 		// assertDocumentoDatosIdentificativosDelSolicitanteFPConDIS();
 		assertObservacionesFP();
 	}
-	
+
 	public void checkSolicitudFirmadaYPresentadaSolicitante() {
 		clickOnButtonFirmarYPresentarSolitanteFP();
 		clickOnButtonFirmarYPresentar();
@@ -162,7 +162,6 @@ public class HomologacionEsPageObject extends SolicitudPageObject {
 //		fillTelefonoRF();
 		uploadApudActaRF();
 	}
-
 
 	public void checkTabFirmaYPresentacionDeSolicitudDataParaRepresentanteJuridica() {
 		clickOnCheckBoxAceptarCondiciones();

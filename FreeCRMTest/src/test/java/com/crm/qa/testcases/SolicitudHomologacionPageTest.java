@@ -1,6 +1,5 @@
 package com.crm.qa.testcases;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,11 +11,19 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 	public void setUp() {
 		initialization();
 		authentication();
+		clickOnButtonHomologacion();
 	}
 
 	@Test(priority = 1)
 	public void homologacionTest() {
 		fillTabDatosRelativosAlProcedimientoParaSolicitante();
+		fillTabSolicitanteParaSolicitante();
+		fillTabRepresentanteParaSolicitante();
+		fillTabDatosDeNotificacion();
+		fillTabDocumentacion();
+		fillTabPagosDeTasas();
+		fillTabPresentacion();
+		checkTabFirmaYPresentacionDeSolicitudDataParaSolicitante();
 	}
 
 //	@Test(priority = 2)
@@ -30,8 +37,8 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 //		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
 //	}
 
-	@AfterMethod
-	public void tearDown() {
-		driver.quit();
-	}
+//	@AfterMethod
+//	public void tearDown() {
+//		driver.quit();
+//	}
 }

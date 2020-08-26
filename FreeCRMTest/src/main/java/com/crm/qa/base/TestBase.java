@@ -10,10 +10,12 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.crm.qa.util.TestUtil;
 
@@ -26,13 +28,13 @@ public class TestBase {
 
 	public static WebDriver driver = null;
 	public static Properties prop;
+	public static WebDriverWait wait;
 
 	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
 	By buttonAccess = By.xpath("//*[@id=\"tooltip1\"]/div[2]/div/fieldset/div");
 	By buttonNuevaSolicitud = By.xpath("//*[@id=\"mainWrapper\"]/div[2]/div/div/div[1]/div[2]/button");
 
 	public TestBase() {
-
 		try {
 			// Create Object of propreties class
 			prop = new Properties();
@@ -74,6 +76,7 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 
 		driver.get(prop.getProperty("url"));
+		wait = new WebDriverWait(driver, 10);
 	}
 
 	public void sleep(Long time) {
@@ -85,6 +88,11 @@ public class TestBase {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void scrollDown() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,130)");
 	}
 
 	// ========== Authentication ========== //
