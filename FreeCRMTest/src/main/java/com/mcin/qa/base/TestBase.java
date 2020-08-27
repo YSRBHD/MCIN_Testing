@@ -1,4 +1,4 @@
-package com.crm.qa.base;
+package com.mcin.qa.base;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,9 +14,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.crm.qa.util.TestUtil;
+import com.mcin.qa.util.WebEventListener;
 
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
@@ -26,13 +26,17 @@ import io.github.bonigarcia.wdm.managers.InternetExplorerDriverManager;
 
 public class TestBase {
 
-	public static WebDriver driver = null;
+	public static WebDriver driver;
 	public static Properties prop;
 	public static WebDriverWait wait;
+	public static EventFiringWebDriver e_driver;
+	public static WebEventListener eventListener;
 
-	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
-	By buttonAccess = By.xpath("//*[@id=\"tooltip1\"]/div[2]/div/fieldset/div");
-	By buttonNuevaSolicitud = By.xpath("//*[@id=\"mainWrapper\"]/div[2]/div/div/div[1]/div[2]/button");
+	By buttonAcceder = By.xpath("//*[@class=\"btn btn-primary\"]");
+	By buttonAccess = By.xpath("//*[@onclick=\"JAVASCRIPT:selectedIdP('AFIRMA');idpRedirect.submit();\"]");
+	By buttonNuevaSolicitud = By.xpath("//*[@class=\"btn btn-primary mlft5 floatRightItem\"]");
+
+	// Read from Properties file
 
 	public TestBase() {
 		try {
@@ -53,6 +57,8 @@ public class TestBase {
 
 	public static void initialization() {
 
+		// Browser initialization
+
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equals("chrome")) {
@@ -70,14 +76,23 @@ public class TestBase {
 			driver = new InternetExplorerDriver();
 		}
 
+		// Read and register from Event Listener Class
+
+		e_driver = new EventFiringWebDriver(driver);
+		eventListener = new WebEventListener();
+		e_driver.register(eventListener);
+		driver = e_driver;
+
+		// Browser management
+
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
-
 		driver.get(prop.getProperty("url"));
-		wait = new WebDriverWait(driver, 10);
+
+		wait = new WebDriverWait(driver, 30);
 	}
+
+	// Implicit wait
 
 	public void sleep(Long time) {
 		if (time == null) {
@@ -90,12 +105,20 @@ public class TestBase {
 		}
 	}
 
+	// Scroll down
+
 	public void scrollDown() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,130)");
 	}
 
-	// ========== Authentication ========== //
+	// Authentication Method
+
+	public void authentication() {
+		clickOnButtonAcceder();
+		chooseChromeCertificate();
+		clickOnButtonNuevaSolicitud();
+	}
 
 	public void clickOnButtonAcceder() {
 		driver.findElement(buttonAcceder).click();
@@ -135,13 +158,6 @@ public class TestBase {
 		} catch (AWTException e1) {
 			e1.printStackTrace();
 		}
-	}
-
-	public void authentication() {
-		clickOnButtonAcceder();
-		chooseChromeCertificate();
-		clickOnButtonNuevaSolicitud();
-
 	}
 
 }
