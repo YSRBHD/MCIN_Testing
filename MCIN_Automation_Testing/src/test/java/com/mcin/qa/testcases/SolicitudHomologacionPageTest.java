@@ -15,8 +15,8 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 		clickOnButtonHomologacion();
 	}
 
-	@Test(priority = 1)
-	public void homologacionTest() {
+	@Test(priority = 2)
+	public void homologacionSolicitanteTest() {
 		fillTabDatosRelativosAlProcedimientoParaSolicitante();
 		fillTabSolicitanteParaSolicitante();
 		fillTabRepresentanteParaSolicitante();
@@ -29,12 +29,20 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 		assertSolicitudFirmadaYPresentada();
 	}
 
-//	@Test(priority = 2)
-//	public void crmLogoImageTest() {
-//		boolean flag = loginPage.validateCRMImage();
-//		Assert.assertTrue(flag);
-//	}
-//
+	@Test(priority = 1)
+	public void homologacionRepresentanteTest() {
+		fillTabDatosRelativosAlProcedimientoParaRepresentante();
+		fillTabSolicitanteParaRepresentante();
+		fillTabRepresentanteParaRepresentanteFisica();
+		fillTabDatosDeNotificacion();
+		fillTabDocumentacion();
+		fillTabPagosDeTasas();
+		fillTabPresentacion();
+		checkTabFirmaYPresentacionDeSolicitudDataParaRepresentanteFisica();
+		enviarSolicitud();
+		assertSolicitudFirmadaYPresentada();
+	}
+
 //	@Test(priority = 3)
 //	public void loginTest() {
 //		homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));

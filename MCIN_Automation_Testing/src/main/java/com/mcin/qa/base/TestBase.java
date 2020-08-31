@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.mcin.qa.util.WebEventListener;
@@ -32,7 +33,7 @@ public class TestBase {
 	public static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
 
-	By buttonAcceder = By.xpath("//*[@class=\"btn btn-primary\"]");
+	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
 	By buttonAccess = By.xpath("//*[@onclick=\"JAVASCRIPT:selectedIdP('AFIRMA');idpRedirect.submit();\"]");
 	By buttonNuevaSolicitud = By.xpath("//*[@class=\"btn btn-primary mlft5 floatRightItem\"]");
 
@@ -44,7 +45,7 @@ public class TestBase {
 			prop = new Properties();
 			// Location of the Propreties File
 			FileInputStream ip = new FileInputStream(
-					"C:\\Users\\developer\\git\\repository\\FreeCRMTest\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
+					"C:\\Users\\developer\\git\\repository\\MCIN_Automation_Testing\\src\\main\\java\\com\\mcin\\qa\\config\\config.properties");
 			// Connection between the Java Code and the Propreties File (Load Properties)
 			prop.load(ip);
 
@@ -76,7 +77,7 @@ public class TestBase {
 			driver = new InternetExplorerDriver();
 		}
 
-		// Read and register from Event Listener Class
+		// Read from Event Listener Class (Generation of selenium actions logs)
 
 		e_driver = new EventFiringWebDriver(driver);
 		eventListener = new WebEventListener();
@@ -88,6 +89,8 @@ public class TestBase {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.get(prop.getProperty("url"));
+//		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+//		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 
 		wait = new WebDriverWait(driver, 30);
 	}
@@ -121,17 +124,17 @@ public class TestBase {
 	}
 
 	public void clickOnButtonAcceder() {
-		driver.findElement(buttonAcceder).click();
+		wait.until(ExpectedConditions.elementToBeClickable(buttonAcceder)).click();
 		sleep(null);
 	}
 
 	public void clickOnButtonAccess() {
-		driver.findElement(buttonAccess).click();
+		wait.until(ExpectedConditions.elementToBeClickable(buttonAccess)).click();
 		sleep(null);
 	}
 
 	public void clickOnButtonNuevaSolicitud() {
-		driver.findElement(buttonNuevaSolicitud).click();
+		wait.until(ExpectedConditions.elementToBeClickable(buttonNuevaSolicitud)).click();
 		sleep(null);
 	}
 

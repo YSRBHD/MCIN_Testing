@@ -21,7 +21,8 @@ public class SolicitudHomologacionPage extends TestBase {
 
 	By buttonHomologacion = By.xpath("//*[@alt=\"Homologacion\"]");
 	By tabDatosRelativosAlProcedimiento = By.xpath("//*[@data-ui-sref=\"tituloSolicitud\"]");
-	By radioButtonUsuarioSolicitante = By.xpath("//*[@id=\"formTitulo\"]/div[2]/div/div/div[1]/div/label/input");
+	By radioButtonUsuarioSolicitante = By.xpath("(//*[@name=\"tipoUsuario\"])[1]");
+	By radioButtonUsuarioRepresentante = By.xpath("(//*[@name=\"tipoUsuario\"])[2]");
 	By textBoxDenominacionDelTitulo = By.xpath(
 			"(//input[@name=\"nombreTitulo\"][@class=\"form-control inputborder ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required\"])[2]");
 	By textBoxUniversidad = By.xpath("(//*[@name=\"nombreUniversidad\"])[1]");
@@ -34,21 +35,34 @@ public class SolicitudHomologacionPage extends TestBase {
 
 	// Tab Solicitante
 
-	By buttonSolicitante = By.xpath("//*[@data-ui-sref=\"solicitanteSolicitud\"]");
+	By buttonSolicitante = By.xpath("//*[@data-ng-click=\"next(buttonNext);\"]");
 	By radioButtonGenero = By.xpath("//*[@value=\"H\"]");
 	By datePickerFechaDeNacimiento = By.xpath("//*[@id=\"fechaNacimientoSolMask\"]");
 	By comboboxPaisDeNacimineto = By.xpath("(//*[@name=\"idPaisNacimientoSol\"])[1]");
 	By comboboxPaisDeNaciminetoValueSpain = By.xpath("(//*[@value=\"number:164\"])[1]");
 	By comboboxNationalidad = By.xpath("(//*[@name=\"idNacionalidad\"])[1]");
 	By comboboxNationalidadValueSpain = By.xpath("(//*[@value=\"number:167\"])[6]");
+	By comboboxTipoDeDocumento = By.xpath("//*[@name=\"idTipoDocumentoSolElec\"]");
+	By comboboxTipoDeDocumentoValueDni = By.xpath("(//*[@value=\"number:1\"])[11]");
+	By comboboxPaisDelDocumento = By.xpath("(//*[@name=\"idPaisDocumentoSolElec\"])[1]");
+	By comboboxPaisDelDocumentoValueSpain = By.xpath("(//*[@value=\"number:164\"])[7]");
+	By textBoxNumDocumentoSolicitante = By.xpath("(//*[@name=\"numDocumentoSol\"])[2]");
+	By textBoxNombreSolicitante = By.xpath("//*[@name=\"nombreSol\"]");
+	By textBoxPrimerApellidoSolicitante = By.xpath("//*[@name=\"apellido1sol\"]");
+	By textBoxSegundoApellidoSolicitante = By.xpath("//*[@name=\"apellido2sol\"]");
 
 	// Tab Representante
 
 	By buttonRepresentante = By.xpath("//*[@data-ui-sref=\"representanteSolicitud\"]");
+	By buttonAnadirDocumentApudActaPopup = By.xpath("//*[@data-ng-click=\"uploadFile()\"]");
+	By buttonActualizarDocumentApudActaPopup = By.xpath("//*[@value=\"Actualizar\"]");
+
+	By radiobuttonAdjuntarDocumentoApudActa = By.xpath("(//*[@name=\"optionsAPUD\"])[1]");
+	By buttonAnadirApudActa = By.xpath("(//*[@value=\"Añadir documento\"])[1]");
 
 	// Tab Datos De Notification
 
-	By buttonDatosDeNotificacion = By.xpath(" //*[@data-ui-sref=\"notificacionSolicitud\"]");
+	By buttonDatosDeNotificacion = By.xpath("//*[@data-ng-click=\"next(buttonNext);\"]");
 	By textBoxTelefonoMovilDatosdeNotification = By.xpath("//*[@name=\"telefonoMovilSol\"]");
 	By textBoxTelefonoFijoDatosDeNotification = By.xpath("//*[@name=\"telefonoFijoSol\"]");
 	By textBoxEmailDatosDeNotificationSinPostales = By.xpath("//*[@name=\"emailNot\"]");
@@ -126,6 +140,16 @@ public class SolicitudHomologacionPage extends TestBase {
 	By textBoxObservacionesFP = By.xpath("//*[@id=\"observaciones\"]");
 	By textBoxSolicitudFirmadaYPresentada = By.xpath("//*[@class=\"alert alert-dismissible\"]");
 
+	By textBoxTipoDocumentoRepresentanteFP = By.xpath("(//*[@data-ng-model=\"tipoDocumentoIdentidadDB.tipo\"])[2]");
+	By textBoxNumDocumentoRepresentanteFP = By.xpath("//*[@data-ng-model=\"solicitud.numDocumentoRep\"]");
+	By textBoxApudActaFP = By.xpath("(//*[@class=\"dashed mtop15\"])[1]");
+	By textBoxAcreditativoIdentidadNacionalidadRepresentanteFP = By.xpath("(//*[@class=\"dashed mtop15\"])[2]");
+	By textBoxDeclaracionResponsableRepresentanteFP = By.xpath("(//*[@class=\"dashed mtop15\"])[3]");
+	By TextBoxTituloAcademicoCertificadoUniversidadRepresentanteFP = By.xpath("(//*[@class=\"dashed mtop15\"])[4]");
+	By textBoxCertificacionAcademicaEstudiosRealizadosRepresentanteFP = By.xpath("(//*[@class=\"dashed mtop15\"])[5]");
+	By textBoxAcreditacionCompetenciaLinguisticaRepresentanteFP = By.xpath("(//*[@class=\"dashed mtop15\"])[6]");
+	By textBoxOtrosDocumentosFPRepresentanteTextValue = By.xpath("(//*[@class=\"dashed mtop15\"])[7]");
+
 	// Pantalla enviar solicitud
 
 	By buttonFirmarYPresentarSolicitanteFP = By.xpath("//*[@data-ng-click=\"goToFirmar('firmarSolicitud')\"]");
@@ -142,14 +166,34 @@ public class SolicitudHomologacionPage extends TestBase {
 		sleep(null);
 	}
 
+	public void clickOnButtonDatosRelativosAlProcedimiento() {
+		Actions act = new Actions(driver);
+		act.moveToElement(driver.findElement(tabDatosRelativosAlProcedimiento)).click().perform();
+		sleep(null);
+	}
+
 	public void clickOnUsuarioSolicitante() {
 		driver.findElement(radioButtonUsuarioSolicitante).click();
 		sleep(null);
 	}
 
+	public void clickOnUsuarioRepresentante() {
+//		wait.until(ExpectedConditions.elementToBeClickable(radioButtonUsuarioRepresentante)).click();
+//		sleep(null);
+		Actions act = new Actions(driver);
+		act.moveToElement(driver.findElement(radioButtonUsuarioRepresentante)).click().perform();
+		sleep(3000L);
+	}
+
 	public void fillDenominacionDelTituloSolicitante() {
 		driver.findElement(textBoxDenominacionDelTitulo).click();
 		driver.findElement(textBoxDenominacionDelTitulo).sendKeys("Prueba_Auto_Solicitante");
+		sleep(null);
+	}
+
+	public void fillDenominacionDelTituloRepresentante() {
+		driver.findElement(textBoxDenominacionDelTitulo).click();
+		driver.findElement(textBoxDenominacionDelTitulo).sendKeys("Prueba_Auto_Representante");
 		sleep(null);
 	}
 
@@ -179,7 +223,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	public void fillProfesion() {
 		driver.findElement(comboBoxProfesion).click();
 		driver.findElement(comboboxProfesionvalueProfesion1).click();
-		sleep(null);
+		sleep(3000L);
 	}
 
 	public void fillTabDatosRelativosAlProcedimientoParaSolicitante() {
@@ -190,6 +234,19 @@ public class SolicitudHomologacionPage extends TestBase {
 		fillUniversidad();
 		fillPais();
 		fillProfesion();
+	}
+
+	public void fillTabDatosRelativosAlProcedimientoParaRepresentante() {
+		clickOnUsuarioRepresentante();
+		fillDenominacionDelTituloRepresentante();
+		fillFechainicio();
+		fillFechaFin();
+		fillUniversidad();
+		fillPais();
+		fillProfesion();
+		clickOnButtonSolicitante();
+		clickOnButtonDatosRelativosAlProcedimiento();
+		clickOnUsuarioRepresentante();
 	}
 
 	// Tab Solicitante
@@ -223,12 +280,61 @@ public class SolicitudHomologacionPage extends TestBase {
 		sleep(null);
 	}
 
+	public void fillNombreSolicitante() {
+		wait.until(ExpectedConditions.elementToBeClickable(textBoxNombreSolicitante)).click();
+		driver.findElement(textBoxNombreSolicitante).sendKeys("Apollo");
+		sleep(null);
+	}
+
+	public void fillPrimerApellidoSolicitante() {
+		wait.until(ExpectedConditions.elementToBeClickable(textBoxPrimerApellidoSolicitante)).click();
+		driver.findElement(textBoxPrimerApellidoSolicitante).sendKeys("Taurus");
+		sleep(null);
+	}
+
+	public void fillSegundoApellidoSolicitante() {
+		wait.until(ExpectedConditions.elementToBeClickable(textBoxSegundoApellidoSolicitante)).click();
+		driver.findElement(textBoxSegundoApellidoSolicitante).sendKeys("Medusa");
+		sleep(null);
+	}
+
+	public void fillTipoDeDocumentoSolicitante() {
+		wait.until(ExpectedConditions.elementToBeClickable(comboboxTipoDeDocumento)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(comboboxTipoDeDocumentoValueDni)).click();
+		sleep(null);
+	}
+
+	public void fillPaisDelDocumentoSolicitante() {
+		wait.until(ExpectedConditions.elementToBeClickable(comboboxPaisDelDocumento)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(comboboxPaisDelDocumentoValueSpain)).click();
+		sleep(null);
+	}
+
+	public void fillNumDocumentoSolicitante() {
+		wait.until(ExpectedConditions.elementToBeClickable(textBoxNumDocumentoSolicitante)).click();
+		driver.findElement(textBoxNumDocumentoSolicitante).sendKeys("99999018D");
+		sleep(null);
+	}
+
 	public void fillTabSolicitanteParaSolicitante() {
 		clickOnButtonSolicitante();
 		fillGenero();
 		fillPaisDeNacimientoSolicitante();
 		fillFechaDeNacimientoSolicitante();
 		fillNationalidadSolicitante();
+	}
+
+	public void fillTabSolicitanteParaRepresentante() {
+		clickOnButtonSolicitante();
+		fillNombreSolicitante();
+		fillPrimerApellidoSolicitante();
+		fillSegundoApellidoSolicitante();
+		fillGenero();
+		fillPaisDeNacimientoSolicitante();
+		fillFechaDeNacimientoSolicitante();
+		fillNationalidadSolicitante();
+		fillTipoDeDocumentoSolicitante();
+		fillNumDocumentoSolicitante();
 	}
 
 	// Tab Representante
@@ -242,10 +348,37 @@ public class SolicitudHomologacionPage extends TestBase {
 		clickOnButtonRepresentante();
 	}
 
+	public void uploadApudActaRF() {
+		wait.until(ExpectedConditions.elementToBeClickable(radiobuttonAdjuntarDocumentoApudActa)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(buttonAnadirApudActa)).click();
+		uploadDocumentApudActaAction();
+		sleep(null);
+	}
+
+	public void uploadDocumentApudActaAction() {
+		WebElement fileInput = driver.findElement(By.id("file"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = driver.findElement(By.id("file"));
+		js.executeScript("arguments[0].setAttribute('style', 'left:30px')", element);
+		fileInput.sendKeys(prop.getProperty("DATA_FILE"));
+		wait.until(ExpectedConditions.elementToBeClickable(buttonAnadirDocumentApudActaPopup)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(buttonActualizarDocumentApudActaPopup));
+		scrollDown();
+		sleep(null);
+	}
+
+	public void fillTabRepresentanteParaRepresentanteFisica() {
+		clickOnButtonRepresentante();
+		uploadApudActaRF();
+	}
+
 	// Tab Datos De Notification
 
 	public void clickOnButtonDatosDeNotificacion() {
-		driver.findElement(buttonDatosDeNotificacion).click();
+//		driver.findElement(buttonDatosDeNotificacion).click();
+//		sleep(null);
+		Actions act = new Actions(driver);
+		act.moveToElement(driver.findElement(buttonDatosDeNotificacion)).click().perform();
 		sleep(null);
 	}
 
@@ -509,7 +642,7 @@ public class SolicitudHomologacionPage extends TestBase {
 
 	public void assertNacionalidadFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNacionalidadFP, "Spanish"));
+		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNacionalidadFP, "Español"));
 	}
 
 	public void assertTipoDeDocumentoFP() {
@@ -544,11 +677,83 @@ public class SolicitudHomologacionPage extends TestBase {
 		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxEmailDatosElectroFP, "Test@email.es"));
 	}
 
+	public void assertTipoDocumentoRepresentanteFP() {
+		scrollDown();
+		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxTipoDocumentoRepresentanteFP, "DNI"));
+	}
+
+	public void assertNumDocumentoRepresentanteFisicaFP() {
+		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNumDocumentoRepresentanteFP, "99999018D"));
+	}
+
+	public void assertDocumenApudActa() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(textBoxApudActaFP).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+	}
+
+	public void assertDocumentoAcreditativoIdentidadNacionalidadRepresentanteFP() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(textBoxAcreditativoIdentidadNacionalidadRepresentanteFP).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+
+	}
+
+	public void assertDocumentoDeclaracionResponsableRepresentanteFP() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(textBoxDeclaracionResponsableRepresentanteFP).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+
+	}
+
+	public void assertDocumentoTituloAcademicoCertificadoUniversidadRepresentanteFP() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(TextBoxTituloAcademicoCertificadoUniversidadRepresentanteFP).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+
+	}
+
+	public void assertDocumentoCertificacionAcademicaEstudiosRealizadosRepresentanteFP() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(textBoxCertificacionAcademicaEstudiosRealizadosRepresentanteFP).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+
+	}
+
+	public void assertDocumentoAcreditacionCompetenciaLinguisticaRepresentanteFP() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(textBoxAcreditacionCompetenciaLinguisticaRepresentanteFP).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+
+	}
+
+	public void assertDocumentoOtrosDocumentosFPRepresentante() {
+		scrollDown();
+		String expectedMessage = "TEST";
+		String message = driver.findElement(textBoxOtrosDocumentosFPRepresentanteTextValue).getText();
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
+
+	}
+
 	public void assertDocumentoAcreditativoIdentidadNacionalidadFP() {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxAcreditativoIdentidadNacionalidadFP).getText();
 		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
 	}
 
 	public void assertDocumentoDeclaracionResponsableFP() {
@@ -556,6 +761,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxDeclaracionResponsableFP).getText();
 		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
 	}
 
 	public void assertDocumentoTituloAcademicoCertificadoUniversidadFP() {
@@ -563,6 +769,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxTituloAcademicoCertificadoUniversidadFP).getText();
 		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		sleep(2000L);
 	}
 
 	public void assertDocumentoCertificacionAcademicaEstudiosRealizadosFP() {
@@ -628,6 +835,39 @@ public class SolicitudHomologacionPage extends TestBase {
 		assertDocumentoCertificacionAcademicaEstudiosRealizadosFP();
 		assertDocumentoAcreditacionCompetenciaLinguisticaFP();
 		assertDocumentoOtrosDocumentosFP();
+		assertObservacionesFP();
+	}
+
+	public void checkTabFirmaYPresentacionDeSolicitudDataParaRepresentanteFisica() {
+		assertTipoDeSolicitudFP();
+		assertDenominacionDelTítuloRepresentanteFP();
+		assertFechaInicioFP();
+		assertFechaFinFP();
+		assertUniversidadFP();
+		assertPaisFP();
+		assertProfesionFP();
+		assertNombreParaRepresentanteFP();
+		assertPrimerApellidoParaRepresentanteFP();
+		assertSegundoApellidoParaRepresentanteFP();
+		assertGeneroFP();
+		assertPaisDeNaciminetoFP();
+		assertFechaDeNaciminetoFP();
+		assertNacionalidadFP();
+		assertTipoDeDocumentoFP();
+		assertPaisDelDocumentoFP();
+		assertNumDocumentoPararepresentanteFP();
+		assertTelefonoFijoFP();
+		assertTelefonoMovilFP();
+		assertEmailDatosElectroFP();
+		assertTipoDocumentoRepresentanteFP();
+		assertNumDocumentoRepresentanteFisicaFP();
+		assertDocumenApudActa();
+		assertDocumentoAcreditativoIdentidadNacionalidadRepresentanteFP();
+		assertDocumentoDeclaracionResponsableRepresentanteFP();
+		assertDocumentoTituloAcademicoCertificadoUniversidadRepresentanteFP();
+		assertDocumentoCertificacionAcademicaEstudiosRealizadosRepresentanteFP();
+		assertDocumentoAcreditacionCompetenciaLinguisticaRepresentanteFP();
+		assertDocumentoOtrosDocumentosFPRepresentante();
 		assertObservacionesFP();
 	}
 
