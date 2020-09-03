@@ -35,7 +35,7 @@ public class TestBase {
 
 	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
 	By buttonAccess = By.xpath("//*[@onclick=\"JAVASCRIPT:selectedIdP('AFIRMA');idpRedirect.submit();\"]");
-	By buttonNuevaSolicitud = By.xpath("//*[@class=\"btn btn-primary mlft5 floatRightItem\"]");
+	By buttonNuevaSolicitud = By.xpath("//*[@data-ng-click=\"NuevaSolicitud()\"]");
 
 	// Read from Properties file
 
@@ -124,16 +124,22 @@ public class TestBase {
 	}
 
 	public void clickOnButtonAcceder() {
+//		driver.findElement(buttonAcceder).click();
+//		sleep(null);
 		wait.until(ExpectedConditions.elementToBeClickable(buttonAcceder)).click();
 		sleep(null);
 	}
 
 	public void clickOnButtonAccess() {
-		wait.until(ExpectedConditions.elementToBeClickable(buttonAccess)).click();
+		driver.findElement(buttonAccess).click();
 		sleep(null);
+//		wait.until(ExpectedConditions.elementToBeClickable(buttonAccess)).click();
+//		sleep(null);
 	}
 
 	public void clickOnButtonNuevaSolicitud() {
+//		driver.findElement(buttonNuevaSolicitud).click();
+//		sleep(null);
 		wait.until(ExpectedConditions.elementToBeClickable(buttonNuevaSolicitud)).click();
 		sleep(null);
 	}

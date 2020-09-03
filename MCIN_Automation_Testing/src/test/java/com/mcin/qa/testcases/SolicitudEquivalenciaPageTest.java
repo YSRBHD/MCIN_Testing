@@ -4,19 +4,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.mcin.qa.pages.SolicitudHomologacionPage;
+import com.mcin.qa.pages.SolicitudEquivalenciaPage;
 
-public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
-
+public class SolicitudEquivalenciaPageTest extends SolicitudEquivalenciaPage {
 	@BeforeMethod
 	public void setUp() {
 		initialization();
 		authentication();
-		clickOnButtonHomologacion();
+		clickOnButtonEquivalencia();
 	}
 
 	@Test(priority = 1)
-	public void homologacionSolicitanteTest() {
+	public void equivalenciaSolicitanteTest() {
 		fillTabDatosRelativosAlProcedimientoParaSolicitante();
 		fillTabSolicitanteParaSolicitante();
 		fillTabRepresentanteParaSolicitante();
@@ -30,7 +29,7 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 	}
 
 	@Test(priority = 2)
-	public void homologacionRepresentanteTest() {
+	public void equivalenciaRepresentanteTest() {
 		fillTabDatosRelativosAlProcedimientoParaRepresentante();
 		fillTabSolicitanteParaRepresentante();
 		fillTabRepresentanteParaRepresentanteFisica();
@@ -45,6 +44,6 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 
 	@AfterMethod
 	public void tearDown() {
-		driver.quit();
+		// driver.quit();
 	}
 }

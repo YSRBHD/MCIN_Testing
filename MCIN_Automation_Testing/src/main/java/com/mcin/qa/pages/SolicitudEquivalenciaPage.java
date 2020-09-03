@@ -9,8 +9,7 @@ import org.testng.Assert;
 
 import com.mcin.qa.base.TestBase;
 
-public class SolicitudHomologacionPage extends TestBase {
-
+public class SolicitudEquivalenciaPage extends TestBase {
 	// ====== Page Factory (Objects Repository) ====== //
 
 	// Tab Datos Relativos Al Procedimiento
@@ -20,6 +19,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	// performance
 
 	By buttonHomologacion = By.xpath("//*[@alt=\"Homologacion\"]");
+	By buttonEquivalencia = By.xpath("//*[@alt=\"Equivalencia\"]");
 	By tabDatosRelativosAlProcedimiento = By.xpath("//*[@data-ui-sref=\"tituloSolicitud\"]");
 	By radioButtonUsuarioSolicitante = By.xpath("(//*[@name=\"tipoUsuario\"])[1]");
 	By radioButtonUsuarioRepresentante = By.xpath("(//*[@name=\"tipoUsuario\"])[2]");
@@ -32,6 +32,10 @@ public class SolicitudHomologacionPage extends TestBase {
 	By comboBoxPaisvalueSpain = By.xpath("(//*[@value=\"number:164\"])[1]");
 	By comboBoxProfesion = By.xpath("(//*[@name=\"idProfesion\"])[1]");
 	By comboboxProfesionvalueProfesion1 = By.xpath("(//*[@value=\"number:35\"])[6]");
+	By comboBoxRamaDeConocimiento = By.xpath("(//*[@name=\"idRamaConocimiento\"])[1]");
+	By comboboxRamaDeConocimientoArtesYHumanidades = By
+			.xpath("(//*[@data-ng-value=\"ramaConocimientoDB.idRamaConocimiento\"])[1]");
+	By radioButtonNivelAcademico = By.xpath("(//*[@name=\"optionsRadios\"])[1]");
 
 	// Tab Solicitante
 
@@ -124,6 +128,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	By textBoxFechaFinFP = By.xpath("//*[@data-ng-model=\"solicitud.fechaFin\"]");
 	By textBoxUniversidadFP = By.xpath("//*[@data-ng-model=\"solicitud.nombreUniversidad\"]");
 	By textBoxPaisFP = By.xpath("//*[@data-ng-model=\"pais.nombre\"]");
+	By textBoxRamaDeConocimiento = By.xpath("//*[@data-ng-model=\"ramaConocimientoDB.rama\"]");
 	By textBoxProfesionFP = By.xpath("//*[@data-ng-model=\"profesionDB.denominacion\"]");
 	By textBoxNombreFP = By.xpath("//*[@data-ng-model=\"solicitud.nombreSol\"]");
 	By textBoxPrimerApellidoFP = By.xpath("//*[@data-ng-model=\"solicitud.apellido1sol\"]");
@@ -161,7 +166,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	By buttonFirmarYPresentarFP = By.xpath("//*[@data-ng-click=\"goToFirmar('firmarSolicitud')\"]");
 	By buttonFirmarYPresentar = By.xpath("//*[@data-ng-click=\"firmarSolicitud(idSolicitud)\"]");
 
-//======================================================================//
+	// ======================================================================//
 
 	// ====== Actions ====== //
 
@@ -169,6 +174,11 @@ public class SolicitudHomologacionPage extends TestBase {
 
 	public void clickOnButtonHomologacion() {
 		driver.findElement(buttonHomologacion).click();
+		sleep(null);
+	}
+
+	public void clickOnButtonEquivalencia() {
+		driver.findElement(buttonEquivalencia).click();
 		sleep(null);
 	}
 
@@ -184,8 +194,6 @@ public class SolicitudHomologacionPage extends TestBase {
 	}
 
 	public void clickOnUsuarioRepresentante() {
-//		wait.until(ExpectedConditions.elementToBeClickable(radioButtonUsuarioRepresentante)).click();
-//		sleep(null);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(radioButtonUsuarioRepresentante)).click().perform();
 		sleep(3000L);
@@ -232,14 +240,26 @@ public class SolicitudHomologacionPage extends TestBase {
 		sleep(3000L);
 	}
 
+	public void clickOnNivelAcademico() {
+		wait.until(ExpectedConditions.elementToBeClickable(radioButtonNivelAcademico)).click();
+		sleep(null);
+	}
+
+	public void fillRamaDeConocimiento() {
+		driver.findElement(comboBoxRamaDeConocimiento).click();
+		driver.findElement(comboboxRamaDeConocimientoArtesYHumanidades).click();
+		sleep(null);
+	}
+
 	public void fillTabDatosRelativosAlProcedimientoParaSolicitante() {
-		clickOnUsuarioSolicitante();
+		// clickOnUsuarioSolicitante();
 		fillDenominacionDelTituloSolicitante();
 		fillFechainicio();
 		fillFechaFin();
 		fillUniversidad();
 		fillPais();
-		fillProfesion();
+		clickOnNivelAcademico();
+		fillRamaDeConocimiento();
 	}
 
 	public void fillTabDatosRelativosAlProcedimientoParaRepresentante() {
@@ -249,7 +269,8 @@ public class SolicitudHomologacionPage extends TestBase {
 		fillFechaFin();
 		fillUniversidad();
 		fillPais();
-		fillProfesion();
+		clickOnNivelAcademico();
+		fillRamaDeConocimiento();
 		clickOnButtonSolicitante();
 		clickOnButtonDatosRelativosAlProcedimiento();
 		clickOnUsuarioRepresentante();
@@ -452,6 +473,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		// fillEmailDatosDeNotificationPostales();
 
 	}
+
 	// Tab Documentation
 
 	public void clickOnButtonDocumentacion() {
@@ -579,6 +601,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	// Pantalla enviar solicitud
 
 	public void clickOnButtonFirmarYPresentarFP() {
+		sleep(3000L);
 		wait.until(ExpectedConditions.elementToBeClickable(buttonFirmarYPresentarFP)).click();
 	}
 
@@ -633,6 +656,12 @@ public class SolicitudHomologacionPage extends TestBase {
 	public void assertProfesionFP() {
 		scrollDown();
 		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxProfesionFP, "Abogado"));
+	}
+
+	public void assertRamaDeConocimineto() {
+		scrollDown();
+		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxRamaDeConocimiento, "ARTES Y HUMANIDADES"));
+
 	}
 
 	public void assertProfesionAccriditacionFP() {
@@ -860,7 +889,8 @@ public class SolicitudHomologacionPage extends TestBase {
 		assertFechaFinFP();
 		assertUniversidadFP();
 		assertPaisFP();
-		assertProfesionFP();
+		assertRamaDeConocimineto();
+		// assertProfesionFP();
 		assertNombreFP();
 		assertPrimerApellidoFP();
 		assertSegundoApellidoFP();
@@ -890,7 +920,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		assertFechaFinFP();
 		assertUniversidadFP();
 		assertPaisFP();
-		assertProfesionFP();
+		// assertProfesionFP();
 		assertNombreParaRepresentanteFP();
 		assertPrimerApellidoParaRepresentanteFP();
 		assertSegundoApellidoParaRepresentanteFP();
@@ -915,5 +945,4 @@ public class SolicitudHomologacionPage extends TestBase {
 		assertDocumentoOtrosDocumentosFPRepresentante();
 		assertObservacionesFP();
 	}
-
 }
