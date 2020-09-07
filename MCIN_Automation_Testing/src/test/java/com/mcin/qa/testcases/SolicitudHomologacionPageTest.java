@@ -45,6 +45,6 @@ public class SolicitudHomologacionPageTest extends SolicitudHomologacionPage {
 
 	@AfterMethod
 	public void tearDown() {
-		// driver.quit();
+		driver.quit();
 	}
 }

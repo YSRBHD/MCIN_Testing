@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.mcin.qa.testcases.SolicitudHomologacionPageTest">
+      <class name="com.mcin.qa.testcases.SolicitudReconocimientoPageTest">
         <methods>
           <include name="homologacionSolicitanteTest"/>
-          <include name="tearDown"/>
           <include name="setUp"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.mcin.qa.testcases.SolicitudHomologacionPageTest -->
+      </class> <!-- com.mcin.qa.testcases.SolicitudReconocimientoPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -21,7 +21,7 @@ public class SolicitudAcreditacionPage extends TestBase {
 	By buttonAcreditacion = By.xpath("//*[@alt=\"Acreditacion\"]");
 	By tabDatosRelativosAlProcedimiento = By.xpath("//*[@data-ui-sref=\"tituloSolicitud\"]");
 	By radioButtonUsuarioSolicitante = By.xpath("(//*[@name=\"tipoUsuario\"])[1]");
-	By radioButtonUsuarioRepresentante = By.xpath("//*[@value=\"REPRESENTANTE\"]");
+	By radioButtonUsuarioRepresentante = By.xpath("(//*[@name=\"tipoUsuario\"])[2]");
 	By textBoxDenominacionDelTitulo = By.xpath("//*[@name=\"idTitulo\"]");
 	By textBoxDenominacionDelTituloValueTitulo1 = By.xpath("(//*[@value=\"number:1\"])[1]");
 	By textBoxUniversidad = By.xpath("(//*[@name=\"nombreUniversidad\"])[1]");

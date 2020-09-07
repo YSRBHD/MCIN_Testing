@@ -15,7 +15,7 @@ public class SolicitudAcreditacionPageTest extends SolicitudAcreditacionPage {
 	}
 
 	@Test(priority = 1)
-	public void AcreditacionSolicitanteTest() {
+	public void acreditacionSolicitanteTest() {
 		fillTabDatosRelativosAlProcedimientoParaSolicitante();
 		fillTabSolicitanteParaSolicitante();
 		fillTabRepresentanteParaSolicitante();
@@ -28,7 +28,7 @@ public class SolicitudAcreditacionPageTest extends SolicitudAcreditacionPage {
 	}
 
 	@Test(priority = 2)
-	public void AcreditacionRepresentanteTest() {
+	public void acreditacionRepresentanteTest() {
 		fillTabDatosRelativosAlProcedimientoParaRepresentante();
 		fillTabSolicitanteParaRepresentante();
 		fillTabRepresentanteParaRepresentanteFisica();
@@ -42,6 +42,6 @@ public class SolicitudAcreditacionPageTest extends SolicitudAcreditacionPage {
 
 	@AfterMethod
 	public void tearDown() {
-		// driver.quit();
+		driver.quit();
 	}
 }

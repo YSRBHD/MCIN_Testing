@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Testing Solicitudes suite">
+    <test name="Regression test">
+         <classes>
+             <class name="com.mcin.qa.testcases.SolicitudEquivalenciaPageTest"/>
+             <class name="com.mcin.qa.testcases.SolicitudHomologacionPageTest"/>
+             <class name="com.mcin.qa.testcases.SolicitudAcreditacionPageTest"/>
+          </classes>
+     </test> <!-- Test --> <!-- Suite -->
+</suite>
