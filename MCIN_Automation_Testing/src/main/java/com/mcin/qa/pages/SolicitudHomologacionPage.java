@@ -22,7 +22,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	By buttonHomologacion = By.xpath("//*[@alt=\"Homologacion\"]");
 	By tabDatosRelativosAlProcedimiento = By.xpath("//*[@data-ui-sref=\"tituloSolicitud\"]");
 	By radioButtonUsuarioSolicitante = By.xpath("(//*[@name=\"tipoUsuario\"])[1]");
-	By radioButtonUsuarioRepresentante = By.xpath("(//*[@name=\"tipoUsuario\"])[2]");
+	By radioButtonUsuarioRepresentante = By.xpath("//*[@value=\"REPRESENTANTE\"]");
 	By textBoxDenominacionDelTitulo = By.xpath(
 			"(//input[@name=\"nombreTitulo\"][@class=\"form-control inputborder ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required\"])[2]");
 	By textBoxUniversidad = By.xpath("(//*[@name=\"nombreUniversidad\"])[1]");
@@ -66,7 +66,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	By textBoxTelefonoMovilDatosdeNotification = By.xpath("//*[@name=\"telefonoMovilSol\"]");
 	By textBoxTelefonoFijoDatosDeNotification = By.xpath("//*[@name=\"telefonoFijoSol\"]");
 	By textBoxEmailDatosDeNotification = By.xpath("//*[@name=\"emailNot\"]");
-	By CheckboxDatosPostales = By.xpath("(//*[@type=\"checkbox\"])[1]");
+	By checkboxDatosPostales = By.xpath("(//*[@type=\"checkbox\"])[1]");
 	By comboboxPaisDatosPostales = By.xpath("(//*[@data-ng-model=\"solicitud.idPaisNot\"])[1]");
 	By comboboxPaisDatosPostalesValueSpain = By.xpath("(//*[@value=\"number:164\"])[1]");
 	By textBoxDireccionDatosDeNotificationPostales = By.xpath("//*[@name=\"direccionNot\"]");
@@ -137,6 +137,11 @@ public class SolicitudHomologacionPage extends TestBase {
 	By textBoxNumdocumentoFP = By.xpath("//*[@data-ng-model=\"solicitud.numDocumentoSol\"]");
 	By textBoxTelefonoFijoFP = By.xpath("//*[@data-ng-model=\"solicitud.telefonoFijoSol\"]");
 	By textBoxTelefonoMovilFP = By.xpath("//*[@data-ng-model=\"solicitud.telefonoMovilSol\"]");
+	By textBoxPaisDatosPostalesFP = By.xpath("(//*[@data-ng-model=\"pais.nombre\"])[4]");
+	By textBoxDireccionDatosPostalesFP = By.xpath("//*[@data-ng-model=\"solicitud.direccionNot\"]");
+	By textBoxCodigoPostalDatosPostalesFP = By.xpath("//*[@data-ng-model=\"solicitud.codigoPostalNot\"]");
+	By textBoxCiudadDatosPostalesFP = By.xpath("//*[@data-ng-model=\"solicitud.ciudadNot\"]");
+	By textBoxProvinciaDatosPostalesFP = By.xpath("//*[@data-ng-model=\"solicitud.provinciaNot\"]");
 	By textBoxEmailDatosElectroFP = By.xpath("//*[@data-ng-model=\"solicitud.emailNot\"]");
 	By textBoxAcreditativoIdentidadNacionalidadFP = By.xpath("(//*[@class=\"dashed mtop15\"])[1]");
 	By textBoxDeclaracionResponsableFP = By.xpath("(//*[@class=\"dashed mtop15\"])[2]");
@@ -161,7 +166,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	By buttonFirmarYPresentarFP = By.xpath("//*[@data-ng-click=\"goToFirmar('firmarSolicitud')\"]");
 	By buttonFirmarYPresentar = By.xpath("//*[@data-ng-click=\"firmarSolicitud(idSolicitud)\"]");
 
-//======================================================================//
+	// ======================================================================//
 
 	// ====== Actions ====== //
 
@@ -184,8 +189,6 @@ public class SolicitudHomologacionPage extends TestBase {
 	}
 
 	public void clickOnUsuarioRepresentante() {
-//		wait.until(ExpectedConditions.elementToBeClickable(radioButtonUsuarioRepresentante)).click();
-//		sleep(null);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(radioButtonUsuarioRepresentante)).click().perform();
 		sleep(3000L);
@@ -233,7 +236,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	}
 
 	public void fillTabDatosRelativosAlProcedimientoParaSolicitante() {
-		clickOnUsuarioSolicitante();
+		// clickOnUsuarioSolicitante();
 		fillDenominacionDelTituloSolicitante();
 		fillFechainicio();
 		fillFechaFin();
@@ -399,7 +402,7 @@ public class SolicitudHomologacionPage extends TestBase {
 	}
 
 	public void clickOnCheckboxDatosDeNotificationPostales() {
-		driver.findElement(CheckboxDatosPostales).click();
+		driver.findElement(checkboxDatosPostales).click();
 		sleep(null);
 	}
 
@@ -411,13 +414,13 @@ public class SolicitudHomologacionPage extends TestBase {
 
 	public void fillDireccionDatosDeNotificationPostales() {
 		driver.findElement(textBoxDireccionDatosDeNotificationPostales).click();
-		driver.findElement(textBoxDireccionDatosDeNotificationPostales).sendKeys("TEST_Direccion");
+		driver.findElement(textBoxDireccionDatosDeNotificationPostales).sendKeys("TESTDireccion");
 		sleep(null);
 	}
 
 	public void fillCiudadDatosDeNotificationPostales() {
 		driver.findElement(textBoxCiudadDatosDeNotificationPostales).click();
-		driver.findElement(textBoxCiudadDatosDeNotificationPostales).sendKeys("TEST_Ciudad");
+		driver.findElement(textBoxCiudadDatosDeNotificationPostales).sendKeys("TESTCiudad");
 		sleep(null);
 	}
 
@@ -429,7 +432,7 @@ public class SolicitudHomologacionPage extends TestBase {
 
 	public void fillProvinciaPostalDatosDeNotificationPostales() {
 		driver.findElement(textBoxProvinciaDatosDeNotificationPostales).click();
-		driver.findElement(textBoxProvinciaDatosDeNotificationPostales).sendKeys("TEST_Provincia");
+		driver.findElement(textBoxProvinciaDatosDeNotificationPostales).sendKeys("TESTProvincia");
 		sleep(null);
 	}
 
@@ -594,148 +597,230 @@ public class SolicitudHomologacionPage extends TestBase {
 	// Asserts
 
 	public void assertTipoDeSolicitudFP() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(textBoxTipoDeSolicitudFP));
+		sleep(5000L);
+		String expectedMessage = "Homologacion";
+		String message = driver.findElement(textBoxTipoDeSolicitudFP).getAttribute("value");
+		System.out.println("This is the expected message: " + " " + message);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+		scrollDown();
 	}
 
 	public void assertDenominacionDelTítuloSolicitanteFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxDenominacionDelTítuloFP,
-				"Prueba_Auto_Solicitante"));
+		String expectedMessage = "Prueba_Auto_Solicitante";
+		String message = driver.findElement(textBoxDenominacionDelTítuloFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertDenominacionDelTítuloRepresentanteFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxDenominacionDelTítuloFP,
-				"Prueba_Auto_Representante"));
+		String expectedMessage = "Prueba_Auto_Representante";
+		String message = driver.findElement(textBoxDenominacionDelTítuloFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertFechaInicioFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxFechaInicioFP, "01/01/2019"));
+		String expectedMessage = "01/01/2019";
+		String message = driver.findElement(textBoxFechaInicioFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertFechaFinFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxFechaFinFP, "01/01/2020"));
+		String expectedMessage = "01/01/2020";
+		String message = driver.findElement(textBoxFechaFinFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertUniversidadFP() {
 		scrollDown();
-		wait.until(
-				ExpectedConditions.textToBePresentInElementValue(textBoxUniversidadFP, "Test_Automatico_Universidad"));
+		String expectedMessage = "Test_Automatico_Universidad";
+		String message = driver.findElement(textBoxUniversidadFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertPaisFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxPaisFP, "España"));
+		String expectedMessage = "España";
+		String message = driver.findElement(textBoxPaisFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertProfesionFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxProfesionFP, "Abogado"));
+		String expectedMessage = "Abogado";
+		String message = driver.findElement(textBoxProfesionFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertProfesionAccriditacionFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxProfesionFP, "Abogado"));
+		String expectedMessage = "Abogado";
+		String message = driver.findElement(textBoxProfesionFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertNombreFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNombreFP, "Ciudadano"));
+		String expectedMessage = "Ciudadano";
+		String message = driver.findElement(textBoxNombreFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertNombreParaRepresentanteFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNombreFP, "Apollo"));
+		String expectedMessage = "Apollo";
+		String message = driver.findElement(textBoxNombreFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertPrimerApellidoFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxPrimerApellidoFP, "Ficticio"));
+		String expectedMessage = "Ficticio";
+		String message = driver.findElement(textBoxPrimerApellidoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertPrimerApellidoParaRepresentanteFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxPrimerApellidoFP, "Taurus"));
+		String expectedMessage = "Taurus";
+		String message = driver.findElement(textBoxPrimerApellidoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertSegundoApellidoFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxSegundoApellidoFP, ""));
+		String expectedMessage = "";
+		String message = driver.findElement(textBoxSegundoApellidoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertSegundoApellidoParaRepresentanteFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxSegundoApellidoFP, "Medusa"));
+		String expectedMessage = "Medusa";
+		String message = driver.findElement(textBoxSegundoApellidoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertGeneroFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxGeneroFP, "H"));
+		String expectedMessage = "H";
+		String message = driver.findElement(textBoxGeneroFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertPaisDeNaciminetoFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxPaisDeNacimientoFP, "España"));
+		String expectedMessage = "España";
+		String message = driver.findElement(textBoxPaisDeNacimientoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertFechaDeNaciminetoFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxFechaDeNacimientoFP, "09/06/2020"));
+		String expectedMessage = "09/06/2020";
+		String message = driver.findElement(textBoxFechaDeNacimientoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertNacionalidadFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNacionalidadFP, "Español"));
+		String expectedMessage = "Español";
+		String message = driver.findElement(textBoxNacionalidadFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertTipoDeDocumentoFP() {
-		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxTipoDeDocumentoFP, "DNI"));
+		String expectedMessage = "DNI";
+		String message = driver.findElement(textBoxTipoDeDocumentoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertPaisDelDocumentoFP() {
-		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxPaisDelDocumentoFP, "España"));
+		String expectedMessage = "España";
+		String message = driver.findElement(textBoxPaisDelDocumentoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertNumDocumentoFP() {
-		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNumdocumentoFP, "99999018D"));
+		String expectedMessage = "99999018D";
+		String message = driver.findElement(textBoxNumdocumentoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertNumDocumentoPararepresentanteFP() {
-		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNumdocumentoFP, "99999018D"));
+		String expectedMessage = "99999018D";
+		String message = driver.findElement(textBoxNumdocumentoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertTelefonoFijoFP() {
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxTelefonoFijoFP, "0606060606"));
+		String expectedMessage = "0606060606";
+		String message = driver.findElement(textBoxTelefonoFijoFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertTelefonoMovilFP() {
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxTelefonoMovilFP, "0606060606"));
+		String expectedMessage = "0606060606";
+		String message = driver.findElement(textBoxTelefonoMovilFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+	}
+
+	public void assertPaisDatosPostalesFP() {
+		String expectedMessage = "España";
+		String message = driver.findElement(textBoxPaisDatosPostalesFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+	}
+
+	public void assertDireccionDatosPostalesFP() {
+		String expectedMessage = "TESTDireccion";
+		String message = driver.findElement(textBoxDireccionDatosPostalesFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+	}
+
+	public void assertCodigoPostalDatosPostalesFP() {
+		String expectedMessage = "34001";
+		String message = driver.findElement(textBoxCodigoPostalDatosPostalesFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+	}
+
+	public void assertCiudadDatosPostalesFP() {
+		String expectedMessage = "TESTCiudad";
+		String message = driver.findElement(textBoxCiudadDatosPostalesFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+	}
+
+	public void assertProvinciaDatosPostalesFP() {
+		String expectedMessage = "TESTProvincia";
+		String message = driver.findElement(textBoxProvinciaDatosPostalesFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertEmailDatosElectroFP() {
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxEmailDatosElectroFP, "Test@email.es"));
+		String expectedMessage = "Test@email.es";
+		String message = driver.findElement(textBoxEmailDatosElectroFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertTipoDocumentoRepresentanteFP() {
 		scrollDown();
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxTipoDocumentoRepresentanteFP, "DNI"));
+		String expectedMessage = "DNI";
+		String message = driver.findElement(textBoxTipoDocumentoRepresentanteFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertNumDocumentoRepresentanteFisicaFP() {
-		wait.until(ExpectedConditions.textToBePresentInElementValue(textBoxNumDocumentoRepresentanteFP, "99999018D"));
+		String expectedMessage = "99999018D";
+		String message = driver.findElement(textBoxNumDocumentoRepresentanteFP).getAttribute("value");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertDocumenApudActa() {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxApudActaFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 		sleep(2000L);
 	}
 
@@ -743,8 +828,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxAcreditativoIdentidadNacionalidadRepresentanteFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 
 	}
 
@@ -752,8 +836,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxDeclaracionResponsableRepresentanteFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 
 	}
 
@@ -761,8 +844,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(TextBoxTituloAcademicoCertificadoUniversidadRepresentanteFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 
 	}
 
@@ -770,8 +852,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxCertificacionAcademicaEstudiosRealizadosRepresentanteFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 
 	}
 
@@ -779,8 +860,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxAcreditacionCompetenciaLinguisticaRepresentanteFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 
 	}
 
@@ -788,8 +868,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxOtrosDocumentosFPRepresentanteTextValue).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 
 	}
 
@@ -797,38 +876,36 @@ public class SolicitudHomologacionPage extends TestBase {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxAcreditativoIdentidadNacionalidadFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertDocumentoDeclaracionResponsableFP() {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxDeclaracionResponsableFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertDocumentoTituloAcademicoCertificadoUniversidadFP() {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxTituloAcademicoCertificadoUniversidadFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
-		sleep(2000L);
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertDocumentoCertificacionAcademicaEstudiosRealizadosFP() {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxCertificacionAcademicaEstudiosRealizadosFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertDocumentoAcreditacionCompetenciaLinguisticaFP() {
 		scrollDown();
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxAcreditacionCompetenciaLinguisticaFP).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
+		sleep(2000L);
 	}
 
 	public void assertDocumentoOtrosDocumentosFP() {
@@ -836,7 +913,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(textBoxOtrosDocumentosFPTextValue));
 		String expectedMessage = "TEST";
 		String message = driver.findElement(textBoxOtrosDocumentosFPTextValue).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertObservacionesFP() {
@@ -850,7 +927,7 @@ public class SolicitudHomologacionPage extends TestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(textBoxSolicitudFirmadaYPresentada));
 		String expectedMessage = "En base a su solicitud se ha creado el Expediente";
 		String message = driver.findElement(textBoxSolicitudFirmadaYPresentada).getText();
-		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: Documento invalid data or not found");
+		Assert.assertTrue(message.contains(expectedMessage), "TEST FAILED: invalid data or not found");
 	}
 
 	public void assertTabFirmaYPresentacionDeSolicitudDataParaSolicitante() {
@@ -873,7 +950,12 @@ public class SolicitudHomologacionPage extends TestBase {
 		assertNumDocumentoFP();
 		assertTelefonoFijoFP();
 		assertTelefonoMovilFP();
-		assertEmailDatosElectroFP();
+		assertPaisDatosPostalesFP();
+		assertDireccionDatosPostalesFP();
+		assertCodigoPostalDatosPostalesFP();
+		assertCiudadDatosPostalesFP();
+		assertProvinciaDatosPostalesFP();
+//		assertEmailDatosElectroFP();
 		assertDocumentoAcreditativoIdentidadNacionalidadFP();
 		assertDocumentoDeclaracionResponsableFP();
 		assertDocumentoTituloAcademicoCertificadoUniversidadFP();
@@ -903,7 +985,12 @@ public class SolicitudHomologacionPage extends TestBase {
 		assertNumDocumentoPararepresentanteFP();
 		assertTelefonoFijoFP();
 		assertTelefonoMovilFP();
-		assertEmailDatosElectroFP();
+		assertPaisDatosPostalesFP();
+		assertDireccionDatosPostalesFP();
+		assertCodigoPostalDatosPostalesFP();
+		assertCiudadDatosPostalesFP();
+		assertProvinciaDatosPostalesFP();
+		// assertEmailDatosElectroFP();
 		assertTipoDocumentoRepresentanteFP();
 		assertNumDocumentoRepresentanteFisicaFP();
 		assertDocumenApudActa();

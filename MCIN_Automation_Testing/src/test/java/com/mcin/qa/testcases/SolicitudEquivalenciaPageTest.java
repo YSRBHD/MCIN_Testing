@@ -44,6 +44,6 @@ public class SolicitudEquivalenciaPageTest extends SolicitudEquivalenciaPage {
 
 	@AfterMethod
 	public void tearDown() {
-		// driver.quit();
+		driver.quit();
 	}
 }

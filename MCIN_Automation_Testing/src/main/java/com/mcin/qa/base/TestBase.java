@@ -33,8 +33,10 @@ public class TestBase {
 	public static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
 
-	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
-	By buttonAccess = By.xpath("//*[@onclick=\"JAVASCRIPT:selectedIdP('AFIRMA');idpRedirect.submit();\"]");
+//	By buttonAcceder = By.xpath("//*[@id=\"formularioPrincial\"]/div/div/div/div[3]/div/div/button");
+	By buttonAcceder = By.xpath("//*[@class=\"btn btn-primary\"]");
+//	By buttonAccess = By.xpath("//*[@onclick=\"JAVASCRIPT:selectedIdP('AFIRMA');idpRedirect.submit();\"]");
+	By buttonAccess = By.xpath("(//*[@class=\"btn_readmore propiedadCSS3\"])[1]");
 	By buttonNuevaSolicitud = By.xpath("//*[@data-ng-click=\"NuevaSolicitud()\"]");
 
 	// Read from Properties file
@@ -89,9 +91,6 @@ public class TestBase {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.get(prop.getProperty("url"));
-//		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-//		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
-
 		wait = new WebDriverWait(driver, 30);
 	}
 
