@@ -6,6 +6,7 @@
              <class name="com.mcin.qa.testcases.SolicitudEquivalenciaPageTest"/>
              <class name="com.mcin.qa.testcases.SolicitudHomologacionPageTest"/>
              <class name="com.mcin.qa.testcases.SolicitudAcreditacionPageTest"/>
+             <class name="com.mcin.qa.testcases.SolicitudReconocimientoPageTest"/>
           </classes>
      </test> <!-- Test --> <!-- Suite -->
 </suite>

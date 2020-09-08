@@ -138,7 +138,7 @@ public class TestBase {
 
 	public void clickOnButtonNuevaSolicitud() {
 //		driver.findElement(buttonNuevaSolicitud).click();
-//		sleep(null);
+		sleep(2000L);
 		wait.until(ExpectedConditions.elementToBeClickable(buttonNuevaSolicitud)).click();
 		sleep(null);
 	}

@@ -5,8 +5,8 @@
     <classes>
       <class name="com.mcin.qa.testcases.SolicitudReconocimientoPageTest">
         <methods>
-          <include name="homologacionSolicitanteTest"/>
           <include name="setUp"/>
+          <include name="reconocimientoRepresentanteTest"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- com.mcin.qa.testcases.SolicitudReconocimientoPageTest -->
