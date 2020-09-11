@@ -125,6 +125,7 @@ public class TestBase {
 	public void clickOnButtonAcceder() {
 //		driver.findElement(buttonAcceder).click();
 //		sleep(null);
+		sleep(2000L);
 		wait.until(ExpectedConditions.elementToBeClickable(buttonAcceder)).click();
 		sleep(null);
 	}

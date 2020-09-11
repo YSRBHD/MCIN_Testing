@@ -188,6 +188,7 @@ public class SolicitudEquivalenciaPage extends TestBase {
 	}
 
 	private void clickOnUsuarioRepresentante() {
+		sleep(2000L);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(radioButtonUsuarioRepresentante)).click().perform();
 		sleep(3000L);

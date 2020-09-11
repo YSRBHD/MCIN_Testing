@@ -159,6 +159,7 @@ public class SolicitudReconocimientoPage extends TestBase {
 	// Tab Datos Relativos Al Procedimiento
 
 	public void clickOnButtonReconocimiento() {
+		sleep(2000L);
 		driver.findElement(buttonReconocimiento).click();
 		sleep(null);
 	}
@@ -170,6 +171,7 @@ public class SolicitudReconocimientoPage extends TestBase {
 	}
 
 	private void clickOnUsuarioRepresentante() {
+		sleep(2000L);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(radioButtonUsuarioRepresentante)).click().perform();
 		sleep(3000L);

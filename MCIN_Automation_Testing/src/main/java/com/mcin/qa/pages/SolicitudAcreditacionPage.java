@@ -20,7 +20,6 @@ public class SolicitudAcreditacionPage extends TestBase {
 
 	private By buttonAcreditacion = By.xpath("//*[@alt=\"Acreditacion\"]");
 	private By tabDatosRelativosAlProcedimiento = By.xpath("//*[@data-ui-sref=\"tituloSolicitud\"]");
-	private By radioButtonUsuarioSolicitante = By.xpath("(//*[@name=\"tipoUsuario\"])[1]");
 	private By radioButtonUsuarioRepresentante = By.xpath("(//*[@name=\"tipoUsuario\"])[2]");
 	private By textBoxDenominacionDelTitulo = By.xpath("//*[@name=\"idTitulo\"]");
 	private By textBoxDenominacionDelTituloValueTitulo1 = By.xpath("(//*[@value=\"number:1\"])[1]");
@@ -180,12 +179,8 @@ public class SolicitudAcreditacionPage extends TestBase {
 		sleep(null);
 	}
 
-	public void clickOnUsuarioSolicitante() {
-		driver.findElement(radioButtonUsuarioSolicitante).click();
-		sleep(null);
-	}
-
 	private void clickOnUsuarioRepresentante() {
+		sleep(2000L);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(radioButtonUsuarioRepresentante)).click().perform();
 		sleep(3000L);
